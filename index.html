@@ -13,10 +13,16 @@
         //event.preventDefault();
     }
 </script>
-
 <body>
-    <addition-two-number onadd="onAddHandler(event)"></addition-two-number>
+    <addition-two-number id="xyz" add="onAddHandler(event)"></addition-two-number>
+    <p id="result"></p>
     <script src="main.js"></script>
 </body>
+    <script>
+        xyz.addEventListener("add", function(event) {
+            document.getElementById('result').textContent = event.detail.total;
+            console.log(event.detail.total);
+        });
+    </script>
 
 </html>

@@ -19,42 +19,10 @@ class AdditionWebcomponent extends HTMLElement {
             () => {
                 const input1 = this.shadowRoot.getElementById('text1').value;
                 const input2 = this.shadowRoot.getElementById('text2').value;
-                const input3 = parseInt(input1) + parseInt(input2);
-                var addEvent = new CustomEvent("add", { bubbles: true, cancelable: true, composed: true, detail: { total: input3 } });
-                if (this.dispatchEvent(addEvent)) {
-                }
+                const result = parseInt(input1) + parseInt(input2);
+                const addEvent = new CustomEvent("add", { bubbles: true, cancelable: true, composed: true, detail: { total: result } });
+                this.dispatchEvent(addEvent);
             });
-        this._onAddFn = null;
-    }
-
-    static get observedAttributes() {
-        return ['onadd'];
-    }
-
-    attributeChangedCallback(attrName, oldVal, newVal) {
-        if (attrName === 'onadd' && oldVal !== newVal) {
-            if (newVal === null) {
-                this.onadd = null;
-            }
-            else {
-                this.onadd = Function(`return function onadd(event) {\n\t${newVal};\n};`)();
-            }
-        }
-    }
-
-    get onadd() {
-        return this._onAddFn;
-    }
-    set onadd(handler) {
-        if (this._onAddFn) {
-            this.removeEventListener('add', this._onAddFn);
-            this._onAddFn = null;
-        }
-
-        if (typeof handler === 'function') {
-            this._onAddFn = handler;
-            this.addEventListener('add', this._onAddFn);
-        }
     }
 
 }
