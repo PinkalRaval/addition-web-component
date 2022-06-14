@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Simple word count web component</title>
+</head>
+<script>
+    function onAddHandler(event) {
+        console.log('onCheckHandler: %O', event.detail.total);
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+        //event.preventDefault();
+    }
+</script>
+
+<body>
+    <addition-two-number onadd="onAddHandler(event)"></addition-two-number>
+    <script src="main.js"></script>
+</body>
+
+</html>
